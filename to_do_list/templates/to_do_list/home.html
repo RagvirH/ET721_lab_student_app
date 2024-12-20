@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - My App</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-5">Welcome to My App!</h1>
+        <p class="lead">Choose an option below:</p>
+
+        <div class="list-group mt-4">
+            <a href="{% url 'blog:blog_list' %}" class="list-group-item list-group-item-action">View Blog Posts</a>
+            <a href="{% url 'upload_notes:create_post' %}" class="list-group-item list-group-item-action">Upload Notes</a>
+            <a href="{% url 'to_do_list:index' %}" class="list-group-item list-group-item-action">To-Do List</a> <!-- Ensure this matches -->
+        </div>
+        
+
+        <footer class="mt-5">
+            <p>&copy; 2024 My App. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

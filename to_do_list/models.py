@@ -1,7 +1,5 @@
 from django.db import models
 
-# Create your models here.
-
-class ToDolist(models.Model):
+class TodoList(models.Model):  # Make sure it's TodoList, not ToDoList or ToDolist
     text = models.CharField(max_length=45)
     completed = models.BooleanField(default=False)
