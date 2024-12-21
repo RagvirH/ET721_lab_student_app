@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Posts</title>
+</head>
+<body class="blog-body">
+    <button onclick="location.href='{% url 'home' %}'" class="btn-home">Home</button>
+    <div class="blog-container">
+        <h1 class="blog-title">All Blog Posts</h1>
+        <a href="{% url 'post_create' %}" class="blog-create-button">Write a New Post</a>
+        <hr>
+        <ul class="blog-list">
+            {% for post in posts %}
+                <li class="blog-item">
+                    <h2 class="blog-post-title"><a href="{% url 'post_detail' post.id %}">{{ post.title }}</a></h2>
+                    <p class="blog-item-date"><strong>Created:</strong> {{ post.created_at|date:"F j, Y" }}</p>
+                    <p class="blog-item-content">{{ post.content|slice:":100" }}...</p>
+                </li>
+            {% endfor %}
+            {% if not posts %}
+                <p>No blog posts yet. <a href="{% url 'post_create' %}">Write one!</a></p>
+            {% endif %}
+        </ul>
+    </div>
+</body>
+</html>

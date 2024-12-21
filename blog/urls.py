@@ -1,13 +1,9 @@
-# blog/urls.py
 from django.urls import path
-from . import views
-
-app_name = 'blog'
+from .views import post_list, post_detail, post_create, post_edit
 
 urlpatterns = [
-    path('', views.blog_list, name='blog_list'),  # Ensure this matches your view function
-    path('post/<int:post_id>/', views.blog_detail, name='post_detail'),
-    path('create/', views.create_post, name='create_post'),
-    path('<int:post_id>/update/', views.update_post, name='update_post'),
-    path('<int:post_id>/delete/', views.delete_post, name='delete_post'),
+    path('', post_list, name='post_list'),
+    path('<int:id>/', post_detail, name='post_detail'),
+    path('new/', post_create, name='post_create'),
+    path('<int:id>/edit/', post_edit, name='post_edit'),
 ]

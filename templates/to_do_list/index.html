@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+</head>
+<body>
+    <!-- Home Button -->
+    <button onclick="location.href='{% url 'home' %}'" class="btn-home">Home</button>
+
+    <!-- Add Task Form -->
+    <form method="POST" action="{% url 'add_task' %}" class="dolistform">
+        {% csrf_token %}
+        <section class="formgroup">
+            <label for="task">What to do?</label>
+            <input type="text" name="text" id="task" class="todo_text" placeholder="Type your task...">
+            <label for="category">Category:</label>
+            <select name="category" id="category" class="todo_category">
+                <option value="personal">Personal</option>
+                <option value="academic">Academic</option>
+                <option value="deadline">Deadline</option>
+            </select>
+            <button type="submit" class="btnadd">ADD TO LIST</button>
+        </section>
+    </form>
+
+    <!-- Display Added Tasks -->
+    <section class="formgroup">
+        <h3>Added to list</h3>
+        <ul class="listdo">
+            {% for task in tasks %}
+                <li class="listitem {% if task.completed %}completed{% endif %}">
+                    <span class="task-text">{{ task.text }}</span> - 
+                    <span class="task-category">{{ task.get_category_display }}</span>
+                    {% if not task.completed %}
+                        <a href="{% url 'complete_task' task.id %}" class="btn_complete">Mark Complete</a>
+                    {% endif %}
+                    <a href="{% url 'delete_task' task.id %}" class="btn_delete">Delete</a>
+                </li>
+            {% empty %}
+                <p>No tasks added yet.</p>
+            {% endfor %}
+        </ul>
+    </section>
+
+    <!-- Filter Tasks by Category -->
+    <section class="filtergroup">
+        <h3>Filter by Category</h3>
+        <form method="GET" action="{% url 'index' %}">
+            <select name="category" class="filter-category">
+                <option value="">All</option>
+                <option value="personal">Personal</option>
+                <option value="academic">Academic</option>
+                <option value="deadline">Deadline</option>
+            </select>
+            <button type="submit" class="btnfilter">Filter</button>
+        </form>
+    </section>
+</body>
+</html>

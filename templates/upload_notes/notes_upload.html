@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Note</title>
+</head>
+<body class="notes-body">
+    <button onclick="location.href='{% url 'home' %}'" class="btn-home">Home</button>
+    <div class="notes-container">
+        <h1 class="notes-title">Upload a Note</h1>
+        <form method="post" enctype="multipart/form-data" class="notes-form">
+            {% csrf_token %}
+            <div class="notes-form-fields">
+                {{ form.as_p }}
+            </div>
+            <button type="submit" class="notes-upload-button">Upload</button>
+        </form>
+        <a href="{% url 'notes_list' %}" class="notes-back-link">Back to Notes</a>
+    </div>
+</body>
+</html>

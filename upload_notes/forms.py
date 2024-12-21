@@ -1,7 +1,7 @@
 from django import forms
-from .models import Post
+from .models import NoteImage
 
-class PostForm(forms.ModelForm):
+class NoteImageForm(forms.ModelForm):
     class Meta:
-        model = Post
-        fields = ['title', 'content', 'file']
+        model = NoteImage
+        fields = ['title', 'image']

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Learning Management App</title>
+</head>
+<body class="homepage-body">
+    <div class="homepage-container">
+        <h1 class="homepage-title">Welcome to the Student Learning Management App</h1>
+        <p class="homepage-intro">Eso lo que es</p>
+        <div class="homepage-links">
+            <a href="{% url 'to_do_list:index' %}" class="homepage-link">To-Do List</a>
+            <a href="{% url 'post_list' %}" class="homepage-link">Blog</a>
+            <a href="{% url 'notes_list' %}" class="homepage-link">Upload Notes</a>
+        </div>
+    </div>
+</body>
+</html>

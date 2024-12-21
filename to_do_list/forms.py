@@ -1,11 +1,10 @@
 from django import forms
-from .models import TodoList
+from .models import Task
 
-class TodoListForm(forms.ModelForm):
+class TaskForm(forms.ModelForm):
     class Meta:
-        model = TodoList
-        fields = ['text', 'completed']
+        model = Task
+        fields = ['text'] 
         widgets = {
-            'text': forms.TextInput(attrs={'class': 'form-control'}),
-            'completed': forms.CheckboxInput(attrs={'class': 'form-check-input'}),
+            'text': forms.TextInput(attrs={'placeholder': 'Type your task...'}),
         }

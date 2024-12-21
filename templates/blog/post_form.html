@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% if form.instance.id %}Edit Post{% else %}New Post{% endif %}</title>
+</head>
+<body class="blog-body">
+    <button onclick="location.href='{% url 'home' %}'" class="btn-home">Home</button>
+\    <div class="blog-container">
+        <h1 class="blog-title">{% if form.instance.id %}Edit Post{% else %}New Post{% endif %}</h1>
+        <form method="post" class="blog-form">
+            {% csrf_token %}
+            <div class="blog-form-fields">
+                {{ form.as_p }}
+            </div>
+            <button type="submit" class="blog-create-button">Save</button>
+        </form>
+        <a href="{% url 'post_list' %}" class="blog-cancel-button">Cancel</a>
+    </div>
+</body>
+</html>

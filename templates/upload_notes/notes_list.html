@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notes List</title>
+</head>
+<body class="notes-body">
+    <button onclick="location.href='{% url 'home' %}'" class="btn-home">Home</button>
+    <div class="notes-container">
+        <h1 class="notes-title">Uploaded Notes</h1>
+        <ul class="notes-list">
+            {% for note in object_list %}
+                <li class="notes-item">
+                    <img src="{{ note.image.url }}" alt="{{ note.title }}" class="notes-image">
+                    <p class="notes-title">{{ note.title }}</p>
+                </li>
+            {% endfor %}
+        </ul>
+        {% if not object_list %}
+            <p class="notes-empty">No notes uploaded yet. Add some now!</p>
+        {% endif %}
+        <a href="{% url 'notes_upload' %}" class="notes-upload-link">Upload a New Note</a>
+    </div>
+</body>
+</html>

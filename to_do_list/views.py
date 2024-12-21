@@ -1,46 +1,37 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import TodoList  # Changed from ToDoList to TodoList
-from .forms import TodoListForm  # Changed from form to forms
-from django.views.decorators.http import require_POST
+from .models import Task
+from .forms import TaskForm
 
 def index(request):
-    todo_tasks = TodoList.objects.order_by('id')
-    form = TodoListForm()
-    context = {'todo_tasks': todo_tasks, 'form': form}
-    return render(request, 'to_do_list/index.html', context)  # Updated template path
+    tasks = Task.objects.order_by('id')
+    context = {'tasks': tasks}
+    return render(request, 'to_do_list/index.html', context)
 
 def add_task(request):
     if request.method == 'POST':
-        task_text = request.POST.get('text')
-        if task_text:
-            TodoList.objects.create(text=task_text)
+        form = TaskForm(request.POST)
+        if form.is_valid():
+            form.save()
         return redirect('index')
+    else:
+        form = TaskForm()
+    return render(request, 'to_do_list/add_task.html', {'form': form})
 
 def delete_all_completed(request):
-    TodoList.objects.filter(completed=True).delete()
+    Task.objects.filter(completed=True).delete()
+    return redirect('index')
+
+def delete_all(request):
+    Task.objects.all().delete()
     return redirect('index')
 
 def complete_task(request, task_id):
-    task = get_object_or_404(TodoList, id=task_id)
+    task = get_object_or_404(Task, id=task_id)
     task.completed = True
     task.save()
     return redirect('index')
 
 def delete_task(request, task_id):
-    task = get_object_or_404(TodoList, id=task_id)
+    task = get_object_or_404(Task, id=task_id)
     task.delete()
-    return redirect('index')
-
-@require_POST
-def addTodoItem(request):
-    form = TodoListForm(request.POST)
-    if form.is_valid():
-        new_todo = TodoList(text=request.POST['text'])
-        new_todo.save()
-    return redirect('index')
-
-def completedTodo(request, todo_id):
-    todo = TodoList.objects.get(pk=todo_id)
-    todo.completed = True
-    todo.save()
     return redirect('index')

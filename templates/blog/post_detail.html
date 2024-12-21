@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ post.title }}</title>
+</head>
+<body class="blog-body">
+    <button onclick="location.href='{% url 'home' %}'" class="btn-home">Home</button>
+    <div class="blog-container">
+        <h1 class="blog-title">{{ post.title }}</h1>
+        <p class="blog-item-date"><strong>Created:</strong> {{ post.created_at|date:"F j, Y" }}</p>
+        <p class="blog-item-content">{{ post.content }}</p>
+        <hr>
+        <a href="{% url 'post_edit' post.id %}" class="blog-edit-button">Edit Post</a>
+        <a href="{% url 'post_list' %}" class="blog-back-button">Back to All Posts</a>
+    </div>
+</body>
+</html>
